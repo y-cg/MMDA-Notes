@@ -1,0 +1,51 @@
+permissions:
+  contents: write
+on:
+  push:
+    branches: [master, workflow_dispatch]
+  pull_request:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+name: Deploy
+jobs:
+  build-convert-deploy:
+    runs-on: ubuntu-22.04
+    name: deploy to gh-pages
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - uses: typst-community/setup-typst@v3
+      - name: Compile Document
+        run: typst compile main.typ main.pdf --font-path ./fonts
+
+      - name: Install pdf2htmlEX
+        run: |
+          wget "https://github.com/pdf2htmlEX/pdf2htmlEX/releases/download/v0.18.8.rc1/pdf2htmlEX-0.18.8.rc1-master-20200630-Ubuntu-focal-x86_64.deb" -O pdf2htmlEX.deb
+          sudo apt install ./pdf2htmlEX.deb
+          sudo apt install -y ttfautohint
+      - name: Convert pdf to html
+        run: |
+          mkdir build
+          # https://github.com/coolwanglu/pdf2htmlEX/issues/455
+          # when there's math formula in typst, it can't be converted successfully
+          # use combination of `--dpi 600 --proof 1 --fallback 1` to make sure it can be rendered
+          pdf2htmlEX  --external-hint-tool=ttfautohint \
+                      --dpi 600 \
+                      --proof 1 \
+                      --fallback 1 \
+                      --font-size-multiplier 1 \
+                      --fit-width 1024 \
+                      --debug 1 \
+                      main.pdf build/index.html
+          mv main.pdf build/main.pdf
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
+          publish_dir: ./build
