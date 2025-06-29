@@ -62,3 +62,49 @@ when $p -> infinity$ then $||x||_p$ is still a norm:
 $
   forall x in bb(R)^n, ||x||_infinity = max_(i = 1, 2, ..., n) |x_i|
 $
+
+Property:
+$
+  ||x||_p <= ||x||_q "if" p >= q
+$
+
+For instance: $ ||x||_1 >= ||x||_2 >= ||x||_infinity $
+
+
+// vector norms for a matrix
+Example 3: $bb(R)^(m times n)$ is a vector space:
+
+- $bb(R)^(m times n)$ can be viewed as $bb(R)^(m n)$
+$
+  mat(
+    x_11, x_12, dots.h, x_(1n);
+    x_21, x_22, dots.h, x_(2n);
+    dots.v, dots.v, dots.v, dots.v;
+    x_(m 1), x_(m 2), ..., x_(m n)
+  )
+  ==>
+  mat(
+    x_11; dots.v; x_(1n);
+    x_21; dots.v; x_(2n);
+    dots.v;
+    x_(m 1); dots.v; x_(m n)
+  )
+$
+
+We can define vector $p$-norm on $bb(R)^(m n)$ for a matrix $A$ on $bb(R)^(m times n)$:
+
+$
+  ||A||_p = (sum_(i=1)^m sum_(j=1)^n |x_(i j)|^p)^(1/p)
+$
+
+For instance when $p = 2$ then:
+
+$
+  ||A||_F = ||A||_(2, "vec") = (sum_(i=1)^m sum_(j=1)^n |x_(i j)|^2)^(1/2)
+$
+
+which is called Frobenius norm. When $p = infinity$ then:
+
+$
+  ||A||_(infinity, "vec") = max_(i = 1, 2, ..., m) max_(j = 1, 2, ..., n) |x_(i j)|
+$
