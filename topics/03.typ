@@ -47,3 +47,18 @@ Proof:
 + $||x||_2 >= 0$ is trivial.
 + $||x||_2 = 0 <=> sum_(i=1)^n x_i^2 = 0 <=> x_i = 0 #v(1em) forall i = 1, 2, ..., n$.
 + $||alpha x||_2 = sqrt((alpha x_1)^2 + (alpha x_2)^2 + ... + (alpha x_n)^2) = |alpha| sqrt(x_1^2 + x_2^2 + ... + x_n^2) = |alpha| ||x||_2$.
+
+#align(right)[$qed$]
+
+$p$-norm
+
+$
+  ||x||_p = (sum_(i=1)^n |x_i|^p)^(1/p)
+$
+$||dot||_p$ is a norm on $bb(R)^n$ for if and only if $p >= 1$.
+
+when $p -> infinity$ then $||x||_p$ is still a norm:
+
+$
+  forall x in bb(R)^n, ||x||_infinity = max_(i = 1, 2, ..., n) |x_i|
+$
