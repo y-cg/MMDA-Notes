@@ -108,3 +108,82 @@ which is called Frobenius norm. When $p = infinity$ then:
 $
   ||A||_(infinity, "vec") = max_(i = 1, 2, ..., m) max_(j = 1, 2, ..., n) |x_(i j)|
 $
+
+// matrix norms for a matrix
+$bb(R)^(m times n)$ can also be viewed as linear transformations $bb(R)^n -> bb(R)^m$. We define matrix $p$-norm by:
+$
+  ||A||_p =^("def") max_(x in bb(R)^n , x != 0) ( ||A x||_p ) / (||x||_p)
+  = max_(||x||_p = 1) ||A x||_p
+$
+
+#pagebreak()
+
+#import "@preview/cetz:0.4.0"
+
+#grid(
+  columns: 2,
+  column-gutter: 1cm,
+  figure(
+    // ||x||_2 = 1
+    cetz.canvas(length: 2cm, {
+      import cetz.draw: *
+
+      set-style(
+        stroke: (thickness: 0.4pt, cap: "round"),
+        content: (padding: 1pt),
+      )
+
+      grid(
+        (-1.5, -1.5),
+        (1.4, 1.4),
+        step: 0.5,
+        stroke: gray + 0.2pt,
+      )
+      line((-1.5, 0), (1.5, 0), mark: (end: "stealth"))
+      content((), $ x $, anchor: "west")
+      line((0, -1.5), (0, 1.5), mark: (end: "stealth"))
+      content((), $ y $, anchor: "south")
+
+      circle((0, 0), radius: 1)
+
+      for (x, ct) in ((-1, $ -1 $), (1, $ 1 $)) {
+        line((x, 3pt), (x, -3pt))
+        content((), anchor: "north", ct)
+      }
+
+      for (y, ct) in ((-1, $ -1 $), (1, $ 1 $)) {
+        line((3pt, y), (-3pt, y))
+        content((), anchor: "east", ct)
+      }
+    }),
+    caption: [ ${ x | x in bb(R)^n "and" ||x||_2 = 1 }$],
+  ),
+
+  figure(
+    // draw ellipse
+    cetz.canvas(length: 2cm, {
+      import cetz.draw: *
+
+      set-style(
+        stroke: (thickness: 0.4pt, cap: "round"),
+        content: (padding: 1pt),
+      )
+
+      grid(
+        (-1.5, -1.5),
+        (1.4, 1.4),
+        step: 0.5,
+        stroke: gray + 0.2pt,
+      )
+      line((-1.5, 0), (1.5, 0), mark: (end: "stealth"))
+      content((), $ x $, anchor: "west")
+      line((0, -1.5), (0, 1.5), mark: (end: "stealth"))
+      content((), $ y $, anchor: "south")
+
+      circle((0, 0), radius: (1, 0.5))
+    }),
+    caption: [ ${ A x |  A in bb(R)^(m times n) "and" ||x||_2 = 1 , x in bb(R)^n }$],
+  ),
+)
+
+So that $||A||_2$ is just to find a point on the ellipse that has the largest distance from the origin.
