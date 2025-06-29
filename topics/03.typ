@@ -182,8 +182,40 @@ $
 
       circle((0, 0), radius: (1, 0.5))
     }),
-    caption: [ ${ A x |  A in bb(R)^(m times n) "and" ||x||_2 = 1 , x in bb(R)^n }$],
+    caption: [ ${ A x | A in bb(R)^(m times n) "and" ||x||_2 = 1 , x in bb(R)^n }$],
   ),
 )
 
 So that $||A||_2$ is just to find a point on the ellipse that has the largest distance from the origin.
+
+In the analytical view:
+
+$
+  ||A||_2^2 & = max_(||x||_2 = 1) ||A x||^2_2   \
+            & = max_(||x||_2 = 1) (x^T A^T A x) \
+            & = max "eigenvalue of" A^T A       \
+$
+then:
+$
+  ||A||_2 & = sqrt(max "eigenvalue of" A^T A)   \
+          & =^("aka") "max singular value of" A
+$
+$|| dot ||_2$ is also called the operator norm of $A$.
+
+- When $p = 1$: (max column 1-norm)
+$
+  ||A||_1 = max_(j = 1, ..., n) (sum_(i = 1)^m |x_(i j)|)
+$
+
+- When $p = infinity$: (max row 1-norm)
+$
+  ||A||_infinity = max_(i = 1, ..., m) (sum_(j = 1)^n |x_(i j)|)
+$
+
+- The default norm of a matrix is $|| dot ||_2$
+
+- We can have other matrix norms, e.g. we can use different norms in $bb(R)^n$ ($p$-norm) and $bb(R)^m$ ($q$-norm):
+
+$
+  ||A||_(p -> q) = max_(||x||_p = 1) ||A x||_q
+$
