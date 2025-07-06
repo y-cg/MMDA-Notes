@@ -26,3 +26,33 @@ Clustering: suppose we are given $N$ vectors in $bb(R)^n$: $x_1, x_2, dots, x_N 
       min_(G_1, dots, G_k \ z_1, dots, z_k) J
       <==> min_(G_1, dots, G_k \ z_1, dots, z_k) sum_(j=1)^K sum_(i in G_j) ||x_i - z_j||^2_2
     $
+  - Optimization:
+    - We have two sets of unknowns: $G_1, dots, G_k$ and $z_1, dots, z_k$.
+    Algorithm: (Alternating minimization)
+    #enum(
+      enum.item()[
+        Initialization $z_1, dots, z_k$
+      ],
+      enum.item()[
+        Fix $z_1, dots, z_k$, solve the min with respect to $G_1, dots, G_k$:
+        $
+          "solve" min_(G_1, dots, G_k) sum_(j=1)^K sum_(i in G_j) ||x_i - z_j||^2_2
+        $<objective-fn-1>
+      ],
+      enum.item()[
+        Fix $G_1, dots, G_k$, solve the min with respect to $z_1, dots, z_k$:
+        $
+          "solve" min_(z_1, dots, z_k) sum_(j=1)^K sum_(i in G_j) ||x_i - z_j||^2_2
+        $<objective-fn-2>
+      ],
+    )
+    How to solve @objective-fn-1 and @objective-fn-2?
+
+    Solving @objective-fn-1:
+    $
+      sum_(j=1)^K sum_(i in G_j) ||x_i - z_j||^2_2
+      &= sum_(i = 1)^N ||x_i - z_(c_i)||^2_2 \
+      &<=> min_(c_i in {1, 2, dots, K}) ||x_i - z_(c_i)||^2_2 \
+      &<=> c_i = op("argmin", limits: #true)_(j in {1, 2, dots, K}) ||x_i - z_j||^2_2
+    $
+    that is, $x_i$ is assigned to the group $j$ that minimizes the distance to the representative vector $z_j$.
