@@ -18,5 +18,7 @@
   spacing: 1.5em,
 )
 
+#set math.equation(numbering: "(1)")
+
 #include "topics/03.typ"
 #include "topics/04.typ"

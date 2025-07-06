@@ -140,18 +140,18 @@ $
         stroke: gray + 0.2pt,
       )
       line((-1.5, 0), (1.5, 0), mark: (end: "stealth"))
-      content((), $ x $, anchor: "west")
+      content((), $x$, anchor: "west")
       line((0, -1.5), (0, 1.5), mark: (end: "stealth"))
-      content((), $ y $, anchor: "south")
+      content((), $y$, anchor: "south")
 
       circle((0, 0), radius: 1)
 
-      for (x, ct) in ((-1, $ -1 $), (1, $ 1 $)) {
+      for (x, ct) in ((-1, $-1$), (1, $1$)) {
         line((x, 3pt), (x, -3pt))
         content((), anchor: "north", ct)
       }
 
-      for (y, ct) in ((-1, $ -1 $), (1, $ 1 $)) {
+      for (y, ct) in ((-1, $-1$), (1, $1$)) {
         line((3pt, y), (-3pt, y))
         content((), anchor: "east", ct)
       }
@@ -176,9 +176,9 @@ $
         stroke: gray + 0.2pt,
       )
       line((-1.5, 0), (1.5, 0), mark: (end: "stealth"))
-      content((), $ x $, anchor: "west")
+      content((), $x$, anchor: "west")
       line((0, -1.5), (0, 1.5), mark: (end: "stealth"))
-      content((), $ y $, anchor: "south")
+      content((), $y$, anchor: "south")
 
       circle((0, 0), radius: (1, 0.5))
     }),
